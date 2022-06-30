@@ -2,11 +2,20 @@
 <html>
     <head>
         <meta charset="UTF-8"></meta>
-        <title>qttsix01</title>
+        <title>qttsix02</title>
     </head>
     <body>
-        <div>
-            <iframe src="https://player.twitch.tv/?channel=qttsix&parent=https://109703056.github.io" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
-        </div>
+        <!-- Add a placeholder for the Twitch embed -->
+<div id="twitch-embed"></div>
+
+<!-- Load the Twitch embed script -->
+<script src="https://player.twitch.tv/js/embed/v1.js"></script>
+
+<!-- Create a Twitch.Player object. This will render within the placeholder div -->
+<script type="text/javascript">
+  new Twitch.Player("twitch-embed", {
+    channel: "qttsix"
+  });
+</script>
     </body>
 </html>
