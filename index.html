@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8"></meta>
-        <title>qttsix01</title>
+        <title>qttsix02</title>
     </head>
     <body>
         <!-- Add a placeholder for the Twitch embed -->
@@ -13,12 +13,13 @@
 
         <!-- Create a Twitch.Player object. This will render within the placeholder div -->
         <script type="text/javascript">
-            new Twitch.Player("twitch-embed", {
+            var options = {
                 width: 854,
                 height: 480,
                 channel: "qttsix"
-                parent:["https://109703056.github.io/"]
-            });
+            };
+            var player=new Twitch.Player("twitch-embed",options);
+            player.setVolumn(0.5);
         </script>
     </body>
 </html>
