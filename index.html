@@ -2,20 +2,24 @@
 <html>
     <head>
         <meta charset="UTF-8"></meta>
-        <title>qttsix02</title>
+        <title>qttsix03</title>
     </head>
     <body>
         <!-- Add a placeholder for the Twitch embed -->
-<div id="twitch-embed"></div>
+        <div id="twitch-embed"></div>
 
-<!-- Load the Twitch embed script -->
-<script src="https://player.twitch.tv/js/embed/v1.js"></script>
+        <!-- Load the Twitch embed script -->
+        <script src="https://player.twitch.tv/js/embed/v1.js"></script>
 
-<!-- Create a Twitch.Player object. This will render within the placeholder div -->
-<script type="text/javascript">
-  new Twitch.Player("twitch-embed", {
-    channel: "qttsix"
-  });
-</script>
+        <!-- Create a Twitch.Player object. This will render within the placeholder div -->
+        <script type="text/javascript">
+            new Twitch.Player("twitch-embed", {
+                channel: "qttsix"
+            });
+            var options = {
+                width: 1600,
+                height: 900
+            };
+        </script>
     </body>
 </html>
