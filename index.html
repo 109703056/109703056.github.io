@@ -4,24 +4,14 @@
         <meta charset="UTF-8"></meta>
         <title>QDDSIX</title>
         <style>
-            body {
+            body{
                 background-color: #000000;
-            }
-            #twitch-embed {
-                width: 100%;
-                height: 100%;
-            }
-            .container {
-                width: 100%;
-                height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
             }
         </style>
     </head>
     <body>
-        <div class="container">
+        
+        <div align="center">
             <!-- Add a placeholder for the Twitch embed -->
             <div id="twitch-embed"></div>
             <!-- Load the Twitch embed script -->
@@ -29,12 +19,15 @@
             <!-- Create a Twitch.Player object. This will render within the placeholder div -->
             <script type="text/javascript">
                 var options = {
-			<!--channel: "qttsix" -->
+                    width: 1376,
+                    height: 774,
+                    <!--channel: "qttsix" -->
                     video: "1775194214"
                 };
-                var player = new Twitch.Player("twitch-embed", options);
-                player.setVolume(0.5);
+                var player=new Twitch.Player("twitch-embed",options);
+                player.setVolumn(0.5);
             </script>
         </div>
+
     </body>
 </html>
