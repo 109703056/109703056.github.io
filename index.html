@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>01</title>
+    <title>02</title>
     <style>
         html, body {
             background-color: #000000;
@@ -14,10 +14,10 @@
             align-items: center;
         }
         #bilibili-embed {
-            width: 80%;
-            height: 45%; /* 16:9 比例 */
-            max-width: 1280px;
-            max-height: 720px;
+            width: 100vw;
+            height: calc(100vw * 9 / 16); /* 根據寬度計算高度，保持16:9比例 */
+            max-height: 100vh; /* 防止高度超出視窗 */
+            max-width: calc(100vh * 16 / 9); /* 防止寬度超出視窗 */
         }
         iframe {
             width: 100%;
