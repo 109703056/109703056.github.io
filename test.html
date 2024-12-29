@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>嵌入 Bilibili 影片</title>
+    <style>
+        html, body {
+            background-color: #000000;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #bilibili-embed {
+            width: 100vw;
+            height: calc(100vw * 9 / 16);
+            max-height: 100vh;
+            max-width: calc(100vh * 16 / 9);
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="bilibili-embed">
+        <iframe id="bilibili-player" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+    </div>
+
+    <script>
+        // 確保查詢參數能夠正確解析並處理
+        (function () {
+            try {
+                // 使用正規表達式解析查詢參數，避免 Safari 兼容性問題
+                const query = window.location.search; // e.g., "?page=2"
+                const params = new URLSearchParams(query);
+                let page = params.get('page'); // 取得 page 參數的值
+
+                // 確保 page 是有效數字，若無效則使用預設值
+                page = page && !isNaN(page) && page > 0 ? page : 1;
+
+                // 動態設置 iframe 的 src，將 page 替換為 p
+                const iframe = document.getElementById('bilibili-player');
+                iframe.src = `//player.bilibili.com/player.html?isOutside=true&aid=112960911443101&bvid=BV118epenECv&cid=500001650138813&p=${page}`;
+            } catch (error) {
+                // 若出現錯誤，回退到預設 page=1
+                console.error('Error parsing query parameters:', error);
+                const iframe = document.getElementById('bilibili-player');
+                iframe.src = `//player.bilibili.com/player.html?isOutside=true&aid=112960911443101&bvid=BV118epenECv&cid=500001650138813&p=1`;
+            }
+        })();
+    </script>
+</body>
+</html>
