@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>02</title>
+    <title>嵌入 Bilibili 影片</title>
     <style>
         html, body {
             background-color: #000000;
@@ -15,9 +15,9 @@
         }
         #bilibili-embed {
             width: 100vw;
-            height: calc(100vw * 9 / 16); /* 根據寬度計算高度，保持16:9比例 */
-            max-height: 100vh; /* 防止高度超出視窗 */
-            max-width: calc(100vh * 16 / 9); /* 防止寬度超出視窗 */
+            height: calc(100vw * 9 / 16);
+            max-height: 100vh;
+            max-width: calc(100vh * 16 / 9);
         }
         iframe {
             width: 100%;
@@ -28,10 +28,18 @@
 </head>
 <body>
     <div id="bilibili-embed">
-        <iframe 
-            src="https://player.bilibili.com/player.html?bvid=BV1gGxdeYEsw&amp;page=1" 
-            allowfullscreen="allowfullscreen">
-        </iframe>
+        <iframe id="bilibili-player" allowfullscreen="allowfullscreen"></iframe>
     </div>
+
+    <script>
+        // 取得 URL 的路徑部分
+        const path = window.location.pathname; // e.g., /project-website-1/01
+        const pageMatch = path.match(/\/(\d+)$/); // 匹配最後的數字部分
+        const page = pageMatch ? pageMatch[1] : 1; // 如果有匹配到則取數字，否則預設為1
+
+        // 動態設置 iframe 的 src
+        const iframe = document.getElementById('bilibili-player');
+        iframe.src = `https://player.bilibili.com/player.html?bvid=BV1gGxdeYEsw&page=${page}`;
+    </script>
 </body>
 </html>
