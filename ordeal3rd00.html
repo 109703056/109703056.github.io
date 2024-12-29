@@ -2,10 +2,10 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>ordeal3rd00test2</title>
+    <title>嵌入 Bilibili 影片</title>
     <style>
         html, body {
-            background-color: #FFFFFF;
+            background-color: #ffffff; /* 設為白色方便檢查 */
             height: 100%;
             margin: 0;
             padding: 0;
@@ -32,27 +32,25 @@
     </div>
 
     <script>
-        // 確保查詢參數能夠正確解析並處理
-        (function () {
+        // 包裝到 DOMContentLoaded 確保 DOM 結構已完成
+        document.addEventListener('DOMContentLoaded', () => {
             try {
-                // 使用正規表達式解析查詢參數，避免 Safari 兼容性問題
-                const query = window.location.search; // e.g., "?page=2"
+                // 嘗試解析查詢參數
+                const query = window.location.search; // "?page=2"
                 const params = new URLSearchParams(query);
-                let page = params.get('page'); // 取得 page 參數的值
+                let page = params.get('page'); // 嘗試獲取 page 值
 
-                // 確保 page 是有效數字，若無效則使用預設值
+                // 確保 page 是有效數字
                 page = page && !isNaN(page) && page > 0 ? page : 1;
 
                 // 動態設置 iframe 的 src
                 const iframe = document.getElementById('bilibili-player');
                 iframe.src = `https://player.bilibili.com/player.html?bvid=BV118epenECv&page=${page}`;
+                console.log('iframe src:', iframe.src);
             } catch (error) {
-                // 若出現錯誤，回退到預設 page=1
-                console.error('Error parsing query parameters:', error);
-                const iframe = document.getElementById('bilibili-player');
-                iframe.src = `https://player.bilibili.com/player.html?bvid=BV118epenECv&page=1`;
+                console.error('Error initializing iframe:', error);
             }
-        })();
+        });
     </script>
 </body>
 </html>
