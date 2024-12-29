@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>嵌</title>
+    <title>ordeal3rd00</title>
     <style>
         html, body {
             background-color: #000000;
@@ -32,13 +32,27 @@
     </div>
 
     <script>
-        // 使用 URL 查詢參數來取得 page 的值
-        const params = new URLSearchParams(window.location.search);
-        const page = params.get('page') || 1; // 預設 page=1
+        // 確保查詢參數能夠正確解析並處理
+        (function () {
+            try {
+                // 使用正規表達式解析查詢參數，避免 Safari 兼容性問題
+                const query = window.location.search; // e.g., "?page=2"
+                const params = new URLSearchParams(query);
+                let page = params.get('page'); // 取得 page 參數的值
 
-        // 動態設置 iframe 的 src
-        const iframe = document.getElementById('bilibili-player');
-        iframe.src = `https://player.bilibili.com/player.html?bvid=BV118epenECv&page=${page}`;
+                // 確保 page 是有效數字，若無效則使用預設值
+                page = page && !isNaN(page) && page > 0 ? page : 1;
+
+                // 動態設置 iframe 的 src
+                const iframe = document.getElementById('bilibili-player');
+                iframe.src = `https://player.bilibili.com/player.html?bvid=BV118epenECv&page=${page}`;
+            } catch (error) {
+                // 若出現錯誤，回退到預設 page=1
+                console.error('Error parsing query parameters:', error);
+                const iframe = document.getElementById('bilibili-player');
+                iframe.src = `https://player.bilibili.com/player.html?bvid=BV118epenECv&page=1`;
+            }
+        })();
     </script>
 </body>
 </html>
