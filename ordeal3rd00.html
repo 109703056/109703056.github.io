@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>ordeal3rd00</title>
+    <title>嵌</title>
     <style>
         html, body {
             background-color: #000000;
@@ -33,10 +32,9 @@
     </div>
 
     <script>
-        // 取得 URL 的路徑部分
-        const path = window.location.pathname; // e.g., /project-website-1/01
-        const pageMatch = path.match(/\/(\d+)$/); // 匹配最後的數字部分
-        const page = pageMatch ? pageMatch[1] : 1; // 如果有匹配到則取數字，否則預設為1
+        // 使用 URL 查詢參數來取得 page 的值
+        const params = new URLSearchParams(window.location.search);
+        const page = params.get('page') || 1; // 預設 page=1
 
         // 動態設置 iframe 的 src
         const iframe = document.getElementById('bilibili-player');
