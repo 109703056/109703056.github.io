@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <title>嵌入 Bilibili 影片</title>
+    <title>ttt</title>
     <style>
         html, body {
             background-color: #ffffff; /* 設為白色方便檢查 */
@@ -35,20 +35,17 @@
         // 包裝到 DOMContentLoaded 確保 DOM 結構已完成
         document.addEventListener('DOMContentLoaded', () => {
             try {
-                // 嘗試解析查詢參數
-                const query = window.location.search; // "?page=2"
-                const params = new URLSearchParams(query);
-                let page = params.get('page'); // 嘗試獲取 page 值
-
-                // 確保 page 是有效數字
-                page = page && !isNaN(page) && page > 0 ? page : 1;
+                // 手動解析查詢參數
+                const query = window.location.search; // e.g., "?page=2"
+                const match = query.match(/[?&]page=(\d+)/);
+                const page = match ? parseInt(match[1], 10) : 1;
 
                 // 動態設置 iframe 的 src
                 const iframe = document.getElementById('bilibili-player');
                 iframe.src = `https://player.bilibili.com/player.html?bvid=BV118epenECv&page=${page}`;
                 console.log('iframe src:', iframe.src);
             } catch (error) {
-                console.error('Error initializing iframe:', error);
+                console.error('Error initializing iframe with regex:', error);
             }
         });
     </script>
