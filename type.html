@@ -23,7 +23,13 @@
         <p>速度: <span id="speed">0</span> 字/分鐘</p>
     </div>
     <script>
-        const mappings = { "優": "q", "ㄟ": "w", "ㄜ": "e", "彎": "r", "淵": "r", "約": "t" };
+        const mappings = {
+            "優": "q", "ㄟ": "w", "ㄜ": "e", "彎": "r", "淵": "r", "約": "t",
+            "溫": "y", "暈": "y", "屋": "u", "一": "i", "ㄛ": "o", "窩": "o", "耶": "p",
+            "阿": "a", "翁": "s", "庸": "s", "ㄞ": "d", "恩": "f", "ㄥ": "g", "ㄤ": "h", "安": "j",
+            "英": "k", "歪": "k", "汪": "l", "央": "l", "ㄡ": "z", "挖": "x", "壓": "x", "凹": "c",
+            "威": "v", "ㄩ": "v", "音": "b", "邀": "n", "煙": "m"
+        };
         const keys = Object.keys(mappings);
         let targetChar = "";
         let correct = 0, wrong = 0, timeLeft = 120;
