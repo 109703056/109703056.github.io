@@ -14,10 +14,14 @@
 <body>
     <h1>打字練習</h1>
     <p>請輸入對應的按鍵</p>
+    <label for="order">選擇輸入順序：</label>
+    <select id="order">
+        <option value="random">隨機</option>
+        <option value="sequential">依序</option>
+    </select>
     <div id="target"></div>
     <input type="text" id="input" autofocus>
     <div id="stats">
-        <p>時間剩餘: <span id="time">120</span> 秒</p>
         <p>正確數: <span id="correct">0</span></p>
         <p>錯誤數: <span id="wrong">0</span></p>
         <p>速度: <span id="speed">0</span> 字/分鐘</p>
@@ -32,11 +36,18 @@
         };
         const keys = Object.keys(mappings);
         let targetChar = "";
-        let correct = 0, wrong = 0, timeLeft = 120;
+        let correct = 0, wrong = 0;
         let startTime = null;
+        let currentIndex = 0;
         
         function newTarget() {
-            targetChar = keys[Math.floor(Math.random() * keys.length)];
+            const orderType = document.getElementById("order").value;
+            if (orderType === "random") {
+                targetChar = keys[Math.floor(Math.random() * keys.length)];
+            } else {
+                targetChar = keys[currentIndex];
+                currentIndex = (currentIndex + 1) % keys.length;
+            }
             document.getElementById("target").textContent = targetChar;
             document.getElementById("input").value = "";
         }
@@ -62,16 +73,12 @@
             document.getElementById("speed").textContent = Math.round(correct / elapsedMinutes || 0);
         }
         
-        function countdown() {
-            if (timeLeft > 0) {
-                timeLeft--;
-                document.getElementById("time").textContent = timeLeft;
-                setTimeout(countdown, 1000);
-            }
-        }
+        document.getElementById("order").addEventListener("change", function() {
+            currentIndex = 0;
+            newTarget();
+        });
         
         newTarget();
-        countdown();
     </script>
 </body>
 </html>
