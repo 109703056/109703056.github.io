@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打字練習</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        #target { font-size: 24px; margin: 20px; }
+        #input { font-size: 20px; padding: 5px; }
+        #stats { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>打字練習</h1>
+    <p>請輸入對應的按鍵</p>
+    <div id="target"></div>
+    <input type="text" id="input" autofocus>
+    <div id="stats">
+        <p>時間剩餘: <span id="time">60</span> 秒</p>
+        <p>正確數: <span id="correct">0</span></p>
+        <p>錯誤數: <span id="wrong">0</span></p>
+        <p>速度: <span id="speed">0</span> 字/分鐘</p>
+    </div>
+    <script>
+        const mappings = { "優": "q", "ㄟ": "w", "ㄜ": "e", "彎": "r", "淵": "r", "約": "t" };
+        const keys = Object.keys(mappings);
+        let targetChar = "";
+        let correct = 0, wrong = 0, timeLeft = 60;
+        let startTime = null;
+        
+        function newTarget() {
+            targetChar = keys[Math.floor(Math.random() * keys.length)];
+            document.getElementById("target").textContent = targetChar;
+            document.getElementById("input").value = "";
+        }
+        
+        document.getElementById("input").addEventListener("input", function(event) {
+            if (!startTime) startTime = Date.now();
+            const input = event.target.value;
+            if (input === mappings[targetChar]) {
+                correct++;
+            } else {
+                wrong++;
+            }
+            document.getElementById("correct").textContent = correct;
+            document.getElementById("wrong").textContent = wrong;
+            updateSpeed();
+            newTarget();
+        });
+        
+        function updateSpeed() {
+            const elapsedMinutes = (Date.now() - startTime) / 60000;
+            document.getElementById("speed").textContent = Math.round(correct / elapsedMinutes || 0);
+        }
+        
+        function countdown() {
+            if (timeLeft > 0) {
+                timeLeft--;
+                document.getElementById("time").textContent = timeLeft;
+                setTimeout(countdown, 1000);
+            }
+        }
+        
+        newTarget();
+        countdown();
+    </script>
+</body>
+</html>
