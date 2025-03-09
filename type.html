@@ -17,7 +17,7 @@
     <div id="target"></div>
     <input type="text" id="input" autofocus>
     <div id="stats">
-        <p>時間剩餘: <span id="time">60</span> 秒</p>
+        <p>時間剩餘: <span id="time">120</span> 秒</p>
         <p>正確數: <span id="correct">0</span></p>
         <p>錯誤數: <span id="wrong">0</span></p>
         <p>速度: <span id="speed">0</span> 字/分鐘</p>
@@ -26,7 +26,7 @@
         const mappings = { "優": "q", "ㄟ": "w", "ㄜ": "e", "彎": "r", "淵": "r", "約": "t" };
         const keys = Object.keys(mappings);
         let targetChar = "";
-        let correct = 0, wrong = 0, timeLeft = 60;
+        let correct = 0, wrong = 0, timeLeft = 120;
         let startTime = null;
         
         function newTarget() {
@@ -38,15 +38,17 @@
         document.getElementById("input").addEventListener("input", function(event) {
             if (!startTime) startTime = Date.now();
             const input = event.target.value;
+            
             if (input === mappings[targetChar]) {
                 correct++;
-            } else {
+                document.getElementById("correct").textContent = correct;
+                updateSpeed();
+                newTarget();
+            } else if (!mappings[targetChar].startsWith(input)) {
                 wrong++;
+                document.getElementById("wrong").textContent = wrong;
+                event.target.value = ""; // 清空錯誤輸入
             }
-            document.getElementById("correct").textContent = correct;
-            document.getElementById("wrong").textContent = wrong;
-            updateSpeed();
-            newTarget();
         });
         
         function updateSpeed() {
