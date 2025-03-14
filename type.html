@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>打字練習</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; transition: background-color 0.1s; }
         #target { font-size: 24px; margin: 20px; }
         #input { font-size: 20px; padding: 5px; }
         #stats { margin-top: 20px; }
@@ -38,15 +38,22 @@
         let correct = 0, wrong = 0;
         let startTime = null;
         let currentIndex = 0;
+        let lastChar = "";
         
         function newTarget() {
             const orderType = document.getElementById("order").value;
-            if (orderType === "random") {
-                targetChar = keys[Math.floor(Math.random() * keys.length)];
-            } else {
-                targetChar = keys[currentIndex];
-                currentIndex = (currentIndex + 1) % keys.length;
-            }
+            let newChar;
+            do {
+                if (orderType === "random") {
+                    newChar = keys[Math.floor(Math.random() * keys.length)];
+                } else {
+                    newChar = keys[currentIndex];
+                    currentIndex = (currentIndex + 1) % keys.length;
+                }
+            } while (newChar === lastChar);
+            
+            lastChar = newChar;
+            targetChar = newChar;
             document.getElementById("target").textContent = targetChar;
             document.getElementById("input").value = "";
         }
@@ -63,6 +70,8 @@
             } else if (!mappings[targetChar].startsWith(input)) {
                 wrong++;
                 document.getElementById("wrong").textContent = wrong;
+                document.body.style.backgroundColor = "pink";
+                setTimeout(() => document.body.style.backgroundColor = "", 100);
                 event.target.value = ""; // 清空錯誤輸入
             }
         });
@@ -74,6 +83,7 @@
         
         document.getElementById("order").addEventListener("change", function() {
             currentIndex = 0;
+            lastChar = "";
             newTarget();
         });
         
