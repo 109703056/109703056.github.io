@@ -9,20 +9,17 @@ body {
 }
 
 #wordDisplay {
-    font-size: 40px;
+    font-size: 48px;
+    font-weight: bold;
     margin-top: 30px;
-}
-
-#codeDisplay {
-    font-size: 20px;
-    color: #666;
     margin-bottom: 20px;
 }
 
 #inputBox {
-    padding: 10px;
-    font-size: 20px;
-    width: 280px;
+    padding: 12px;
+    font-size: 22px;
+    width: 300px;
+    text-align: center;
 }
 
 #result {
