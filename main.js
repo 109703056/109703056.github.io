@@ -67,14 +67,15 @@ function countdown() {
 function nextWord() {
     current = words[Math.floor(Math.random() * words.length)];
     currentWord.textContent = current.word;
+    currentCode.textContent = current.code;
 
-    // 小鶴碼顯示
-    if (toggleCode.checked) {
-        currentCode.classList.remove("hidden");
-        currentCode.textContent = current.code;
-    } else {
-        currentCode.classList.add("hidden");
-    }
+    // // 小鶴碼顯示
+    // if (toggleCode.checked) {
+    //     currentCode.classList.remove("hidden");
+    //     currentCode.textContent = current.code;
+    // } else {
+    //     currentCode.classList.add("hidden");
+    // }
 }
 
 // ------------------------------
