@@ -18,7 +18,7 @@ const progressCount = document.getElementById("progressCount");
 // ------------------------------
 // 載入字庫
 // ------------------------------
-fetch("word.json")
+fetch("words.json")
     .then(res => res.json())
     .then(data => {
         words = data;
