@@ -1,1 +1,28 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    padding: 30px;
+}
 
+.hidden {
+    display: none;
+}
+
+#wordDisplay {
+    font-size: 48px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+#inputBox {
+    padding: 12px;
+    font-size: 22px;
+    width: 300px;
+    text-align: center;
+}
+
+#result {
+    margin-top: 30px;
+    font-size: 20px;
+}
