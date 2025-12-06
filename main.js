@@ -9,40 +9,17 @@ let timer = null;
 let startTime = 0;
 
 const wordDisplay = document.getElementById("wordDisplay");
-const codeDisplay = document.getElementById("codeDisplay");
 const inputBox = document.getElementById("inputBox");
 const resultDiv = document.getElementById("result");
 
-// 小鶴雙拼碼表（簡化示例）
-function getXiaoheCode(word) {
-    const table = {
-        "你": "ni",
-        "好": "hao",
-        "世": "shi",
-        "界": "jie",
-        "測": "ce",
-        "試": "shi",
-        "練": "lian",
-        "習": "xi",
-        "時": "shi",
-        "間": "jian"
-    };
-
-    let code = "";
-    for (let ch of word) {
-        code += (table[ch] ?? "?") + " ";
-    }
-    return code.trim();
-}
-
-// 預載字庫
+// 載入字庫
 fetch("words.json")
     .then(res => res.json())
     .then(data => {
         words = data;
     });
 
-// 打亂陣列
+// 隨機打亂陣列
 function shuffle(arr) {
     return arr.sort(() => Math.random() - 0.5);
 }
@@ -61,40 +38,34 @@ function nextWord() {
     }
 
     wordDisplay.textContent = currentWord;
-
-    if (document.getElementById("toggleCode").checked) {
-        codeDisplay.textContent = getXiaoheCode(currentWord);
-    } else {
-        codeDisplay.textContent = "";
-    }
-
     inputBox.value = "";
     inputBox.focus();
 }
 
 // 計時模式結束
-function endTimeMode(count) {
+function endTimeMode(count, limit) {
     clearInterval(timer);
     resultDiv.innerHTML = `
         <p>時間到！</p>
-        <p>總共輸入：${count} 個詞</p>
-        <p>平均速度：${(count / (timeLeft / 60)).toFixed(1)} WPM</p>
+        <p>輸入字數：${count} 個</p>
+        <p>平均速度：${(count / (limit / 60)).toFixed(1)} WPM</p>
     `;
+    document.getElementById("practiceArea").classList.add("hidden");
 }
 
-// 全部模式結束
+// 全部練習模式結束
 function endAllMode() {
     let used = (Date.now() - startTime) / 1000;
     resultDiv.innerHTML = `
         <p>全部完成！</p>
-        <p>共 ${words.length} 個詞</p>
+        <p>總詞數：${words.length} 個</p>
         <p>花費時間：${used.toFixed(1)} 秒</p>
         <p>平均速度：${(words.length / (used / 60)).toFixed(1)} WPM</p>
     `;
     document.getElementById("practiceArea").classList.add("hidden");
 }
 
-// 點擊開始
+// 開始按鈕
 document.getElementById("startBtn").onclick = () => {
     mode = document.querySelector("input[name='mode']:checked").value;
     resultDiv.innerHTML = "";
@@ -116,7 +87,7 @@ document.getElementById("startBtn").onclick = () => {
             resultDiv.textContent = `剩餘：${timeLeft} 秒`;
 
             if (timeLeft <= 0) {
-                endTimeMode(count);
+                endTimeMode(count, limit);
             }
         }, 1000);
 
@@ -137,14 +108,5 @@ document.getElementById("startBtn").onclick = () => {
                 nextWord();
             }
         };
-    }
-};
-
-// 小鶴碼表顯示開關
-document.getElementById("toggleCode").onchange = () => {
-    if (codeDisplay.textContent && !document.getElementById("toggleCode").checked) {
-        codeDisplay.textContent = "";
-    } else {
-        codeDisplay.textContent = getXiaoheCode(currentWord);
     }
 };
