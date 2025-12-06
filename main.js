@@ -1,3 +1,4 @@
+
 let words = [];
 let shuffledWords = [];
 let currentWord = "";
@@ -13,11 +14,13 @@ const inputBox = document.getElementById("inputBox");
 const resultDiv = document.getElementById("result");
 
 // 載入字庫
-fetch("words.json")
-    .then(res => res.json())
-    .then(data => {
-        words = data;
-    });
+function reload(){
+    fetch("words.json")
+        .then(res => res.json())
+        .then(data => {
+            words = data;
+        });
+}
 
 // 隨機打亂陣列
 function shuffle(arr) {
@@ -67,6 +70,7 @@ function endAllMode() {
 
 // 開始按鈕
 document.getElementById("startBtn").onclick = () => {
+    reload();
     mode = document.querySelector("input[name='mode']:checked").value;
     resultDiv.innerHTML = "";
     currentIndex = 0;
