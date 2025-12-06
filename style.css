@@ -1,37 +1,28 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: sans-serif;
     text-align: center;
-    padding: 40px;
-    background: #fafafa;
-}
-
-.wordBox {
-    font-size: 40px;
-    font-weight: bold;
-    margin: 20px;
-}
-
-.codeBox {
-    font-size: 22px;
-    color: #555;
-    margin-bottom: 15px;
-}
-
-.settings {
-    margin-bottom: 30px;
+    padding: 30px;
 }
 
 .hidden {
     display: none;
 }
 
-#inputBox {
-    font-size: 22px;
-    padding: 5px 10px;
-    width: 260px;
+#wordDisplay {
+    font-size: 48px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
-#progressCount {
-    margin-top: 10px;
+#inputBox {
+    padding: 12px;
+    font-size: 22px;
+    width: 300px;
+    text-align: center;
+}
+
+#result {
+    margin-top: 30px;
     font-size: 20px;
 }
