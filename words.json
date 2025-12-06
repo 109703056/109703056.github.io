@@ -1,7 +1,7 @@
 [
-    { "word": "你好", "code": "nh;h" },
-    { "word": "時間", "code": "uj;mf" },
+    { "word": "你好", "code": "ni;hc" },
+    { "word": "時間", "code": "ui;jm" },
     { "word": "測試", "code": "ce;ui" },
-    { "word": "小鶴", "code": "xv;hr" },
+    { "word": "小鶴", "code": "xn;he" },
     { "word": "練習", "code": "lm;xi" }
 ]
