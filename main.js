@@ -105,10 +105,15 @@ document.getElementById("startBtn").onclick = () => {
     } else {
         shuffledWords = shuffle([...words]);
         startTime = Date.now();
+        
+        let count = 0;
+        resultDiv.textContent = `剩餘：${words.length-count} 字`
+        
         nextWord();
 
         inputBox.oninput = () => {
             if (inputBox.value === currentWord) {
+                count++;
                 nextWord();
             }
         };
