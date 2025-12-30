@@ -12,12 +12,6 @@ const practiceArea = document.getElementById("practice");
 const startBtn = document.getElementById("startBtn");
 const timeInput = document.getElementById("timeInput");
 
-fetch("words.json")
-  .then(res => res.json())
-  .then(data => {
-    words = data;
-  });
-
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -35,6 +29,7 @@ function nextWord() {
   wordDisplay.textContent = currentWord;
   remainingCount.textContent = remainingWords.length;
   inputBox.value = "";
+  inputBox.focus();
 }
 
 function startPractice() {
@@ -77,4 +72,16 @@ inputBox.addEventListener("input", () => {
   }
 });
 
-startBtn.addEventListener("click", startPractice);
+startBtn.addEventListener("click", () => {
+  // 🔑 關鍵：每次按開始才抓字庫
+  fetch("words.json")
+    .then(res => res.json())
+    .then(data => {
+      words = data;
+      startPractice();
+    })
+    .catch(err => {
+      alert("字庫載入失敗");
+      console.error(err);
+    });
+});
