@@ -1,3 +1,6 @@
+// 🔴 驗證用：看到這個 alert 才代表 JS 有載入
+alert("main.js 已載入");
+
 let words = [];
 let remainingWords = [];
 let currentWord = "";
@@ -73,7 +76,6 @@ inputBox.addEventListener("input", () => {
 });
 
 startBtn.addEventListener("click", () => {
-  // 🔑 關鍵：每次按開始才抓字庫
   fetch("words.json")
     .then(res => res.json())
     .then(data => {
