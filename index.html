@@ -2,33 +2,43 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8" />
-    <title>小鶴雙拼 - 單詞練習</title>
+    <title>小鶴雙拼 - 練習</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <h1>小鶴雙拼 - 單詞練習</h1>
-
-    <div class="mode-section">
-        <label><input type="radio" name="mode" value="time" checked> 計時練習</label>
-        <label><input type="radio" name="mode" value="all"> 全部練習</label>
-    </div>
-
-    <div class="time-setting">
+    <h1>小鶴雙拼・單詞練習</h1>
+    
+    <div id="setup">
+      <label>
+        <input type="radio" name="mode" value="time" checked>
+        計時練習
+      </label>
+      <label>
+        <input type="radio" name="mode" value="all">
+        全部練習
+      </label>
+    
+      <div>
         計時秒數：
-        <input type="number" id="timeInput" value="60" min="30" step="30"> 秒
+        <input type="number" id="timeInput" value="60"> 秒
+      </div>
+    
+      <button id="startBtn">開始</button>
+    </div>
+    
+    <div id="practice" class="hidden">
+      <div id="wordDisplay" class="word"></div>
+    
+      <input id="inputBox" autocomplete="off" />
+    
+      <div id="status">
+        剩餘數量：<span id="remainingCount">0</span>
+      </div>
+    
+      <div id="timer"></div>
     </div>
 
-    <button id="startBtn">開始</button>
-
-    <div id="practiceArea" class="hidden">
-        <div id="wordDisplay"></div>
-        <input id="inputBox" autocomplete="off" placeholder="請輸入..." />
-    </div>
-
-    <div id="result"></div>
-
-    <script src="main.js"></script>
 </body>
 </html>
 
