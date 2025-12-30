@@ -1,122 +1,80 @@
-
 let words = [];
-let shuffledWords = [];
+let remainingWords = [];
 let currentWord = "";
-let currentIndex = 0;
-
-let mode = "time";
-let timeLeft = 0;
 let timer = null;
-let startTime = 0;
+let timeLeft = 0;
 
 const wordDisplay = document.getElementById("wordDisplay");
 const inputBox = document.getElementById("inputBox");
-const resultDiv = document.getElementById("result");
+const remainingCount = document.getElementById("remainingCount");
+const timerDisplay = document.getElementById("timer");
+const practiceArea = document.getElementById("practice");
+const startBtn = document.getElementById("startBtn");
+const timeInput = document.getElementById("timeInput");
 
-// 載入字庫
-function reload(){
-    fetch("words.json")
-        .then(res => res.json())
-        .then(data => {
-            words = data;
-        });
+fetch("words.json")
+  .then(res => res.json())
+  .then(data => {
+    words = data;
+  });
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
 }
 
-// 隨機打亂陣列
-function shuffle(arr) {
-    return arr.sort(() => Math.random() - 0.5);
-}
-
-// 顯示下一個字
 function nextWord() {
-    if (mode === "time") {
-        currentWord = words[Math.floor(Math.random() * words.length)];
-    } else {
-        if (currentIndex >= shuffledWords.length) {
-            endAllMode();
-            return;
-        }
-        currentWord = shuffledWords[currentIndex];
-        currentIndex++;
-    }
+  if (remainingWords.length === 0) {
+    endPractice();
+    return;
+  }
 
-    wordDisplay.textContent = currentWord;
-    inputBox.value = "";
-    inputBox.focus();
+  currentWord = remainingWords.pop();
+  wordDisplay.textContent = currentWord;
+  remainingCount.textContent = remainingWords.length;
+  inputBox.value = "";
 }
 
-// 計時模式結束
-function endTimeMode(count, limit) {
-    clearInterval(timer);
-    resultDiv.innerHTML = `
-        <p>時間到！</p>
-        <p>輸入字數：${count} 個</p>
-        <p>平均速度：${(count / (limit / 60)).toFixed(1)} WPM</p>
-    `;
-    document.getElementById("practiceArea").classList.add("hidden");
+function startPractice() {
+  practiceArea.classList.remove("hidden");
+
+  remainingWords = [...words];
+  shuffle(remainingWords);
+
+  remainingCount.textContent = remainingWords.length;
+  nextWord();
+
+  const mode = document.querySelector('input[name="mode"]:checked').value;
+
+  if (mode === "time") {
+    timeLeft = Number(timeInput.value);
+    timerDisplay.textContent = `剩餘時間：${timeLeft}s`;
+
+    timer = setInterval(() => {
+      timeLeft--;
+      timerDisplay.textContent = `剩餘時間：${timeLeft}s`;
+
+      if (timeLeft <= 0) {
+        endPractice();
+      }
+    }, 1000);
+  } else {
+    timerDisplay.textContent = "";
+  }
 }
 
-// 全部練習模式結束
-function endAllMode() {
-    let used = (Date.now() - startTime) / 1000;
-    resultDiv.innerHTML = `
-        <p>全部完成！</p>
-        <p>總詞數：${words.length} 個</p>
-        <p>花費時間：${used.toFixed(1)} 秒</p>
-        <p>平均速度：${(words.length / (used / 60)).toFixed(1)} WPM</p>
-    `;
-    document.getElementById("practiceArea").classList.add("hidden");
+function endPractice() {
+  clearInterval(timer);
+  alert("練習結束！");
+  practiceArea.classList.add("hidden");
 }
 
-// 開始按鈕
-document.getElementById("startBtn").onclick = () => {
-    reload();
-    mode = document.querySelector("input[name='mode']:checked").value;
-    resultDiv.innerHTML = "";
-    currentIndex = 0;
+inputBox.addEventListener("input", () => {
+  if (inputBox.value === currentWord) {
+    nextWord();
+  }
+});
 
-    document.getElementById("practiceArea").classList.remove("hidden");
-
-    if (mode === "time") {
-        let limit = parseInt(document.getElementById("timeInput").value, 10);
-        let count = 0;
-
-        timeLeft = limit;
-        resultDiv.textContent = `剩餘：${timeLeft} 秒`;
-
-        nextWord();
-
-        timer = setInterval(() => {
-            timeLeft--;
-            resultDiv.textContent = `剩餘：${timeLeft} 秒`;
-
-            if (timeLeft <= 0) {
-                endTimeMode(count, limit);
-            }
-        }, 1000);
-
-        inputBox.oninput = () => {
-            if (inputBox.value === currentWord) {
-                count++;
-                nextWord();
-            }
-        };
-
-    } else {
-        shuffledWords = shuffle([...words]);
-        startTime = Date.now();
-        
-        let countall = words.length;
-        
-        nextWord();
-
-        inputBox.oninput = () => {
-            if (inputBox.value === currentWord) {
-                count--;
-                resultDiv.textContent = `剩餘：${count} 字`
-                nextWord();
-            }
-        };
-    }
-};
-
+startBtn.addEventListener("click", startPractice);
