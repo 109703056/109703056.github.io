@@ -1,25 +1,110 @@
+/* 全站基礎設定 */
+* {
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+               "PingFang TC", "Microsoft JhengHei", sans-serif;
+}
+
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: #e5e5e5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* 主容器 */
+.container {
+  background-color: #1e1e1e;
+  padding: 28px 32px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* 標題 */
+h1 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
   text-align: center;
-  padding: 40px;
+  color: #ffffff;
 }
 
-.word {
-  font-size: 48px;
-  margin: 30px 0;
+/* 目標詞顯示 */
+#targetWord {
+  font-size: 3rem;
+  text-align: center;
+  margin: 24px 0;
+  color: #4fc3f7;
+  letter-spacing: 0.1em;
 }
 
-input {
-  font-size: 24px;
-  padding: 8px;
+/* 剩餘數量 */
+#remainingCount {
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  color: #b0b0b0;
 }
 
+/* 輸入框 */
+input[type="text"] {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background-color: #181818;
+  color: #ffffff;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]::placeholder {
+  color: #777;
+}
+
+input[type="text"]:focus {
+  border-color: #4fc3f7;
+  box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.3);
+}
+
+/* 按鈕 */
 button {
-  font-size: 18px;
-  padding: 6px 20px;
-  margin-top: 10px;
+  margin-top: 18px;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #4fc3f7;
+  color: #000;
+  transition: background-color 0.2s, transform 0.1s;
 }
 
+button:hover {
+  background-color: #29b6f6;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* 隱藏用 */
 .hidden {
   display: none;
+}
+
+/* 底部提示文字（如果有） */
+.hint {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #888;
+  text-align: center;
 }
