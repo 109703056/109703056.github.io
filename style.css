@@ -61,7 +61,7 @@ h1 {
 /* =========================
    🔥 練習核心區（真正的螢幕正中央）
 ========================= */
-.practice-core {
+/* .practice-core {
   position: fixed;
   left: 50%;
   top: 50%;
@@ -69,6 +69,14 @@ h1 {
 
   display: flex;
   flex-direction: column;
+  align-items: center;
+} */
+.practice-core {
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
