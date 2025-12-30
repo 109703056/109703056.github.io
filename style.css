@@ -1,5 +1,5 @@
 /* =========================
-   基本重置與字型
+   基本設定
 ========================= */
 * {
   box-sizing: border-box;
@@ -15,33 +15,21 @@ html, body {
 }
 
 /* =========================
-   全站深色背景
+   全站背景（深色）
 ========================= */
 body {
   background-color: #121212;
   color: #e0e0e0;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 /* =========================
-   主容器
+   主容器（維持原本排版）
 ========================= */
 .container {
-  width: 100%;
-  max-width: 420px;
-  min-height: 60vh;
-
-  background-color: #1e1e1e;
-  border-radius: 14px;
+  position: relative;
   padding: 28px;
-
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
-
-  display: flex;
-  flex-direction: column;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 /* =========================
@@ -49,30 +37,38 @@ body {
 ========================= */
 h1 {
   margin: 0 0 12px 0;
-  text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: #ffffff;
 }
 
 /* =========================
-   剩餘數量顯示
+   設定區（不置中）
 ========================= */
-#remainingCount {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #aaaaaa;
-  margin-bottom: 8px;
+.settings {
+  margin-bottom: 16px;
 }
 
 /* =========================
-   練習核心區（真正置中）
+   狀態資訊
+========================= */
+#remainingCount,
+#remainingTime {
+  margin-top: 6px;
+  font-size: 0.95rem;
+  color: #b0b0b0;
+}
+
+/* =========================
+   🔥 練習核心區（真正的螢幕正中央）
 ========================= */
 .practice-core {
-  flex-grow: 1;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
@@ -80,7 +76,7 @@ h1 {
    目標詞
 ========================= */
 #targetWord {
-  font-size: 3rem;
+  font-size: 3.2rem;
   color: #4fc3f7;
   letter-spacing: 0.15em;
   margin-bottom: 24px;
@@ -91,9 +87,7 @@ h1 {
    輸入框
 ========================= */
 input[type="text"] {
-  width: 100%;
-  max-width: 320px;
-
+  width: 320px;
   padding: 14px 16px;
   font-size: 1.2rem;
 
@@ -103,10 +97,6 @@ input[type="text"] {
   color: #ffffff;
 
   outline: none;
-}
-
-input[type="text"]::placeholder {
-  color: #777;
 }
 
 input[type="text"]:focus {
@@ -119,16 +109,14 @@ input[type="text"]:focus {
 ========================= */
 button {
   margin-top: 16px;
-  padding: 12px;
-  width: 100%;
-
+  padding: 12px 24px;
   font-size: 1rem;
+
   border-radius: 8px;
   border: none;
 
   background-color: #4fc3f7;
   color: #000;
-
   cursor: pointer;
 }
 
